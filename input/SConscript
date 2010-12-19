@@ -1,0 +1,9 @@
+_files = [
+    'manager.cc',
+    'text_input.cc',
+    'completion.cc',
+]
+
+Import('env')
+filez = env.Object(_files)
+Return('filez')
