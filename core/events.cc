@@ -92,8 +92,7 @@ Manager::add_listener(const std::string &event, EventFunc &func, Priority priori
 
 void Manager::emit(const std::string &event, boost::any a1,
         boost::any a2, boost::any a3,
-        boost::any a4, boost::any a5,
-        boost::any a6, boost::any a7)
+        boost::any a4, boost::any a5)
 {
     if(m_events.find(event) == m_events.end())
         return;
@@ -109,10 +108,6 @@ void Manager::emit(const std::string &event, boost::any a1,
         args.push_back(a4);
     if(!a5.empty())
         args.push_back(a5);
-    if(!a6.empty())
-        args.push_back(a6);
-    if(!a7.empty())
-        args.push_back(a7);
 
     m_queueMutex.lock();
     m_queue.push_back(std::make_pair(m_events[event], args));

@@ -23,7 +23,7 @@
 
 #include <numeric>
 #include <sstream>
-#include <tr1/functional>
+#include <functional>
 #include <ui/status_windowlist.h>
 #include <core/events.h>
 #include <core/log.h>
@@ -34,10 +34,10 @@ StatusWindowList::StatusWindowList()
 {
     set_name("windows");
     events::add_listener("window status updated",
-            std::tr1::bind(&StatusWindowList::window_status_updated, this));
+            std::bind(&StatusWindowList::window_status_updated, this));
 
     events::add_listener("window closed",
-            std::tr1::bind(&StatusWindowList::window_closed, this));
+            std::bind(&StatusWindowList::window_closed, this));
 }
 
 void StatusWindowList::window_closed()

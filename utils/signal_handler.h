@@ -25,7 +25,7 @@
 #define _SIGNAL_HANDLER_H_
 
 #include <sys/signal.h>
-#include <tr1/functional>
+#include <functional>
 #include <boost/signal.hpp>
 #include <map>
 

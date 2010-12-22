@@ -23,7 +23,7 @@
 
 #include <sstream>
 #include <stdexcept>
-#include <tr1/functional>
+#include <functional>
 #include <utils/utils.h>
 #include <core/events.h>
 #include <core/log.h>
@@ -35,7 +35,7 @@ class Rot13
 public:
     Rot13() {
 //        events::add_listener_first("key pressed",
-//                std::tr1::bind(&Rot13::key_pressed, this));
+//                std::bind(&Rot13::key_pressed, this));
     }
 
     void key_pressed()

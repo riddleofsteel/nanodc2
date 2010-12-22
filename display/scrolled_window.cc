@@ -35,8 +35,8 @@ ScrolledWindow::ScrolledWindow():
     m_lastlogSize(200),
     m_timestamp("[%H:%M:%S] ")
 {
-    m_bindings[KEY_PPAGE] = std::tr1::bind(&ScrolledWindow::scroll_window, this, -10);
-    m_bindings[KEY_NPAGE] = std::tr1::bind(&ScrolledWindow::scroll_window, this, 10);
+    m_bindings[KEY_PPAGE] = std::bind(&ScrolledWindow::scroll_window, this, -10);
+    m_bindings[KEY_NPAGE] = std::bind(&ScrolledWindow::scroll_window, this, 10);
 
     update_config();
     m_lines.reserve(m_lastlogSize);

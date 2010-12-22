@@ -27,7 +27,7 @@
 #include <pthread.h>
 #include <list>
 #include <vector>
-#include <tr1/functional>
+#include <functional>
 #include <boost/signal.hpp>
 #include <boost/function.hpp>
 #include <boost/any.hpp>
@@ -38,7 +38,7 @@
 namespace events {
 
 typedef std::vector<boost::any> AnyList;
-typedef boost::function<void ()> EventFunc;
+typedef std::function<void ()> EventFunc;
 typedef boost::signal<void ()> EventSig;
 typedef std::map<std::string, EventSig*> EventMap;
 
@@ -70,8 +70,7 @@ public:
     /** Emit the event named \c event. */
     void emit(const std::string &event, boost::any a1=boost::any(),
             boost::any a2=boost::any(), boost::any a3=boost::any(),
-            boost::any a4=boost::any(), boost::any a5=boost::any(),
-            boost::any a6=boost::any(), boost::any a7=boost::any());
+            boost::any a4=boost::any(), boost::any a5=boost::any());
 
     /** Get the nth argument of current event. */
     template <class T>
@@ -131,10 +130,9 @@ boost::signals::connection add_listener_first(const std::string &event, EventFun
 inline
 void emit(const std::string &event, boost::any a1=boost::any(),
         boost::any a2=boost::any(), boost::any a3=boost::any(),
-        boost::any a4=boost::any(), boost::any a5=boost::any(),
-        boost::any a6=boost::any(), boost::any a7=boost::any())
+        boost::any a4=boost::any(), boost::any a5=boost::any())
 {
-    events::Manager::get()->emit(event, a1, a2, a3, a4, a5, a6, a7);
+    events::Manager::get()->emit(event, a1, a2, a3, a4, a5);
 }
 
 template <class T>

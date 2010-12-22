@@ -36,7 +36,7 @@ class Search
 public:
     Search() {
         events::add_listener("command search",
-                std::tr1::bind(&Search::search_callback, this));
+                std::bind(&Search::search_callback, this));
     }
 
     /** /search string */

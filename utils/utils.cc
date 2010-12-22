@@ -21,7 +21,9 @@
  *  
  */
 
+#include <algorithm>
 #include <stdexcept>
+#include <cstring>
 #include <utils/utils.h>
 #include <sys/select.h>
 

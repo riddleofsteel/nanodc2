@@ -268,7 +268,7 @@ bool DownloadManager::startDownload(QueueItem::Priority prio) {
 	size_t downloadCount = getDownloadCount();
 
 	bool full = (SETTING(DOWNLOAD_SLOTS) != 0) && (downloadCount >= (size_t)SETTING(DOWNLOAD_SLOTS));
-	full = full || (SETTING(MAX_DOWNLOAD_SPEED) != 0) && (getRunningAverage() >= (SETTING(MAX_DOWNLOAD_SPEED)*1024));
+	full = ( full || (SETTING(MAX_DOWNLOAD_SPEED) != 0) ) && (getRunningAverage() >= (SETTING(MAX_DOWNLOAD_SPEED)*1024));
 
 	if(full) {
 		bool extraFull = (SETTING(DOWNLOAD_SLOTS) != 0) && (getDownloadCount() >= (size_t)(SETTING(DOWNLOAD_SLOTS)+3));
@@ -396,7 +396,7 @@ int64_t DownloadManager::getResumePos(const string& file, const TigerTree& tt, i
 			check.flush();
 			break;
 		} catch(const Exception&) {
-			dcdebug("Removed bad block at " I64_FMT "\n", blockPos);
+			dcdebug("Removed bad block at %ld\n", blockPos);
 		}
 		startPos = blockPos;
 	} while(startPos > 0);
@@ -677,7 +677,7 @@ void DownloadManager::handleEndData(UserConnection* aSource) {
 		}
 
 		dcassert(d->getPos() == d->getSize());
-		dcdebug("Download finished: %s, size " I64_FMT ", downloaded " I64_FMT "\n", d->getTarget().c_str(), d->getSize(), d->getTotal());
+		dcdebug("Download finished: %s, size %ld, downloaded %ld\n", d->getTarget().c_str(), d->getSize(), d->getTotal());
 
 		// Check if we have some crc:s...
 		if(BOOLSETTING(SFV_CHECK)) {

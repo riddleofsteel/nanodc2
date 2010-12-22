@@ -24,7 +24,7 @@
 #include <algorithm>
 #include <sstream>
 #include <iomanip>
-#include <tr1/functional>
+#include <functional>
 #include <ui/window_search.h>
 #include <utils/utils.h>
 #include <utils/strings.h>
@@ -56,33 +56,33 @@ WindowSearch::WindowSearch(const std::string &str):
         search(m_search);
 
     // download
-    m_bindings['d'] = std::tr1::bind(&WindowSearch::download, this, SETTING(DOWNLOAD_DIRECTORY));
+    m_bindings['d'] = std::bind(&WindowSearch::download, this, SETTING(DOWNLOAD_DIRECTORY));
 
     // download to..
-    m_bindings['D'] = std::tr1::bind(&WindowSearch::set_property, this, PROP_FILETARGET);
+    m_bindings['D'] = std::bind(&WindowSearch::set_property, this, PROP_FILETARGET);
 
     // download directory
-    m_bindings['s'] = std::tr1::bind(&WindowSearch::download, this, SETTING(DOWNLOAD_DIRECTORY));
+    m_bindings['s'] = std::bind(&WindowSearch::download, this, SETTING(DOWNLOAD_DIRECTORY));
 
     // download directory to..
-    m_bindings['S'] = std::tr1::bind(&WindowSearch::set_property, this, PROP_DIRECTORYTARGET);
+    m_bindings['S'] = std::bind(&WindowSearch::set_property, this, PROP_DIRECTORYTARGET);
 
     // browse
-    m_bindings['b'] = std::tr1::bind(&QueueManager::addList, QueueManager::getInstance(),
-                         std::tr1::bind(&WindowSearch::get_user, this), QueueItem::FLAG_CLIENT_VIEW);
+    m_bindings['b'] = std::bind(&QueueManager::addList, QueueManager::getInstance(),
+                         std::bind(&WindowSearch::get_user, this), QueueItem::FLAG_CLIENT_VIEW);
     // match queue
-    m_bindings['M'] = std::tr1::bind(&QueueManager::addList, QueueManager::getInstance(),
-                         std::tr1::bind(&WindowSearch::get_user, this), QueueItem::FLAG_MATCH_QUEUE);
+    m_bindings['M'] = std::bind(&QueueManager::addList, QueueManager::getInstance(),
+                         std::bind(&WindowSearch::get_user, this), QueueItem::FLAG_MATCH_QUEUE);
     // search
-    m_bindings['r'] = std::tr1::bind(&WindowSearch::search, this, std::string());
+    m_bindings['r'] = std::bind(&WindowSearch::search, this, std::string());
 
-    m_bindings['l'] = std::tr1::bind(&WindowSearch::toggle_slots, this);
-    m_bindings['n'] = std::tr1::bind(&WindowSearch::set_property, this, PROP_MINSIZE);
-    m_bindings['m'] = std::tr1::bind(&WindowSearch::set_property, this, PROP_MAXSIZE);
-    m_bindings['e'] = std::tr1::bind(&WindowSearch::set_property, this, PROP_EXTENSION);
-    m_bindings['f'] = std::tr1::bind(&WindowSearch::set_property, this, PROP_SEARCHFILTER);
+    m_bindings['l'] = std::bind(&WindowSearch::toggle_slots, this);
+    m_bindings['n'] = std::bind(&WindowSearch::set_property, this, PROP_MINSIZE);
+    m_bindings['m'] = std::bind(&WindowSearch::set_property, this, PROP_MAXSIZE);
+    m_bindings['e'] = std::bind(&WindowSearch::set_property, this, PROP_EXTENSION);
+    m_bindings['f'] = std::bind(&WindowSearch::set_property, this, PROP_SEARCHFILTER);
     m_bindings['/'] = m_bindings['f'];
-    m_bindings['c'] = std::tr1::bind(&WindowSearch::free_results, this);
+    m_bindings['c'] = std::bind(&WindowSearch::free_results, this);
 }
 
 SearchResult *WindowSearch::get_result()
@@ -218,8 +218,8 @@ void WindowSearch::create_list()
 
     m_resultLock.lock();
     std::for_each(m_results.begin(), m_results.end(),
-        std::tr1::bind(&WindowSearch::add_result, this,
-            std::tr1::placeholders::_1));
+        std::bind(&WindowSearch::add_result, this,
+            std::placeholders::_1));
     m_resultLock.unlock();
 
     std::ostringstream oss;

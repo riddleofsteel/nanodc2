@@ -70,24 +70,24 @@
 // Use maps if hash_maps aren't available
 #ifdef HAVE_HASH
 # ifdef _STLPORT_VERSION
-#  define HASH_SET_X(key, hfunc, eq, order) hash_set<key, hfunc, eq >
-#  define HASH_MAP_X(key, type, hfunc, eq, order) hash_map<key, type, hfunc, eq >
+#  define HASH_SET_X(key, hfunc, eq, order) unordered_set<key, hfunc, eq >
+#  define HASH_MAP_X(key, type, hfunc, eq, order) unordered_map<key, type, hfunc, eq >
 // STLPort 5.0.2 hash_multimap buggy
 #  define HASH_MULTIMAP_X(key, type, hfunc, eq, order) multimap<key, type, order > 
 # elif defined(__GLIBCPP__) || defined(__GLIBCXX__)  // Using GNU C++ library?
-#  define HASH_SET_X(key, hfunc, eq, order) hash_set<key, hfunc, eq >
-#  define HASH_MAP_X(key, type, hfunc, eq, order) hash_map<key, type, hfunc, eq >
-#  define HASH_MULTIMAP_X(key, type, hfunc, eq, order) hash_multimap<key, type, hfunc, eq >
+#  define HASH_SET_X(key, hfunc, eq, order) unordered_set<key, hfunc, eq >
+#  define HASH_MAP_X(key, type, hfunc, eq, order) unordered_map<key, type, hfunc, eq >
+#  define HASH_MULTIMAP_X(key, type, hfunc, eq, order) unordered_multimap<key, type, hfunc, eq >
 # elif defined(_MSC_VER)  // Assume the msvc 7.x stl
-#  define HASH_SET_X(key, hfunc, eq, order) hash_set<key, hfunc >
-#  define HASH_MAP_X(key, type, hfunc, eq, order) hash_map<key, type, hfunc >
-#  define HASH_MULTIMAP_X(key, type, hfunc, eq, order) hash_multimap<key, type, hfunc >
+#  define HASH_SET_X(key, hfunc, eq, order) unordered_set<key, hfunc >
+#  define HASH_MAP_X(key, type, hfunc, eq, order) unordered_map<key, type, hfunc >
+#  define HASH_MULTIMAP_X(key, type, hfunc, eq, order) unordered_multimap<key, type, hfunc >
 # else
 #  error Unknown STL, hashes need to be configured
 # endif
 
-# define HASH_SET hash_set
-# define HASH_MAP hash_map
+# define HASH_SET unordered_set
+# define HASH_MAP unordered_map
 # define HASH_MULTIMAP multimap
 
 #else // HAVE_HASH
@@ -103,26 +103,26 @@
 
 #ifdef _STLPORT_VERSION
 using namespace std;
-#include <hash_map>
-#include <hash_set>
+#include <unordered_map>
+#include <unordered_set>
 
 #elif defined(__GLIBCPP__) || defined(__GLIBCXX__)  // Using GNU C++ library?
-#include <ext/hash_map>
-#include <ext/hash_set>
-#include <ext/functional>
+#include <unordered_map>
+#include <unordered_set>
+#include <functional>
 using namespace std;
-using namespace __gnu_cxx;
+using namespace __gnu_cxx; 
 
 // GNU C++ library doesn't have hash(std::string) or hash(long long int)
-namespace __gnu_cxx {
-	template<> struct hash<std::string> {
-		size_t operator()(const std::string& x) const
-			{ return hash<const char*>()(x.c_str()); }
-	};
-	template<> struct hash<long long int> {
-		size_t operator()(long long int x) const { return x; }
-	};
-}
+// namespace __gnu_cxx {
+// 	template<> struct hash<std::string> {
+// 		size_t operator()(const std::string& x) const
+// 			{ return hash<const char*>()(x.c_str()); }
+// 	};
+// 	template<> struct hash<long long int> {
+// 		size_t operator()(long long int x) const { return x; }
+// 	};
+// }
 #else // __GLIBCPP__
 
 #include <hash_map>

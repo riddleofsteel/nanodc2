@@ -23,7 +23,7 @@
 
 #include <sstream>
 #include <stdexcept>
-#include <tr1/functional>
+#include <functional>
 #include <core/events.h>
 #include <core/log.h>
 
@@ -34,7 +34,7 @@ class KeyPressed
 public:
     KeyPressed() {
         events::add_listener("key pressed",
-                std::tr1::bind(&KeyPressed::key_pressed, this));
+                std::bind(&KeyPressed::key_pressed, this));
     }
 
     void key_pressed()

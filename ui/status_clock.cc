@@ -34,11 +34,11 @@ StatusClock::StatusClock()
     set_name("clock");
     update_config();
     core::Settings::get()->add_listener(
-            std::tr1::bind(&StatusClock::update_config, this));
+            std::bind(&StatusClock::update_config, this));
 
     events::add_listener("client created",
-            std::tr1::bind(&TimerManager::addListener,
-                std::tr1::bind(&TimerManager::getInstance), this));
+            std::bind(&TimerManager::addListener,
+                std::bind(&TimerManager::getInstance), this));
 
     update();
 }

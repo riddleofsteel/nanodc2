@@ -21,6 +21,7 @@
 
 #include "Text.h"
 #include <glib.h>
+#include <ctype.h>
 
 char Text::asciiLower[128];
 wchar_t Text::lower[65536];
@@ -32,7 +33,7 @@ void Text::initialize() {
 #ifdef _WIN32
 		lower[i] = (wchar_t)CharLowerW((LPWSTR)i);
 #else
-		lower[i] = (char)towlower(i);
+		lower[i] = (char)tolower(i);
 #endif
 	}
 

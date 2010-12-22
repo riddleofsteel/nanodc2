@@ -21,7 +21,7 @@
  *  
  */
 
-#include <tr1/functional>
+#include <functional>
 #include <core/events.h>
 #include <utils/utils.h>
 #include <ui/status_windowinfo.h>
@@ -32,7 +32,7 @@ StatusWindowInfo::StatusWindowInfo()
 {
     set_name("window");
     events::add_listener("window changed",
-        std::tr1::bind(&StatusWindowInfo::update, this));
+        std::bind(&StatusWindowInfo::update, this));
 
     update();
 }

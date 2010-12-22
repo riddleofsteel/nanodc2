@@ -36,7 +36,7 @@ class Msg
 public:
     Msg() {
         events::add_listener("command msg",
-                std::tr1::bind(&Msg::msg_callback, this));
+                std::bind(&Msg::msg_callback, this));
     }
 
     /** /msg nick message */

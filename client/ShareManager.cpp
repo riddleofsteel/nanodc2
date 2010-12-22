@@ -857,7 +857,7 @@ void ShareManager::generateXmlList() {
 			} catch(const FileException&) {
 				// Ignore, this is for caching only...
 			}
-			bzXmlRef = auto_ptr<File>(new File(newXmlName, File::READ, File::OPEN));
+			bzXmlRef = unique_ptr<File>(new File(newXmlName, File::READ, File::OPEN));
 			setBZXmlFile(newXmlName);
 			bzXmlListLen = File::getSize(newXmlName);
 		} catch(const Exception&) {
@@ -1098,13 +1098,13 @@ void ShareManager::Directory::search(SearchResult::List& aResults, StringSearch:
 		return;
 
 	StringSearch::List* cur = &aStrings;
-	auto_ptr<StringSearch::List> newStr;
+	unique_ptr<StringSearch::List> newStr;
 
 	// Find any matches in the directory name
 	for(StringSearch::Iter k = aStrings.begin(); k != aStrings.end(); ++k) {
 		if(k->match(name)) {
 			if(!newStr.get()) {
-				newStr = auto_ptr<StringSearch::List>(new StringSearch::List(aStrings));
+				newStr = unique_ptr<StringSearch::List>(new StringSearch::List(aStrings));
 			}
 			newStr->erase(remove(newStr->begin(), newStr->end(), *k), newStr->end());
 		}
@@ -1229,13 +1229,13 @@ void ShareManager::Directory::search(SearchResult::List& aResults, AdcSearch& aS
 	StringSearch::List* cur = aStrings.include;
 	StringSearch::List* old = aStrings.include;
 
-	auto_ptr<StringSearch::List> newStr;
+	unique_ptr<StringSearch::List> newStr;
 
 	// Find any matches in the directory name
 	for(StringSearch::Iter k = cur->begin(); k != cur->end(); ++k) {
 		if(k->match(name) && !aStrings.isExcluded(name)) {
 			if(!newStr.get()) {
-				newStr = auto_ptr<StringSearch::List>(new StringSearch::List(*cur));
+				newStr = unique_ptr<StringSearch::List>(new StringSearch::List(*cur));
 			}
 			newStr->erase(remove(newStr->begin(), newStr->end(), *k), newStr->end());
 		}

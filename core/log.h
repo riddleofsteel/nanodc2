@@ -29,7 +29,7 @@
 #include <utils/instance.h>
 #include <utils/mutex.h>
 #include <boost/signals.hpp>
-#include <tr1/functional>
+#include <functional>
 #include <fstream>
 
 namespace core {
@@ -61,7 +61,7 @@ public:
 
     /** Add a log event listener which is called when a message is logged. */
     boost::signals::connection add_listener(
-        std::tr1::function<void (const std::string &, MessageType)> listener
+        std::function<void (const std::string &, MessageType)> listener
     ) {
         return m_logSig.connect(listener);
     }

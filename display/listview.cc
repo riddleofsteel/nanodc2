@@ -23,7 +23,7 @@
 
 #include <limits> // std::numeric_limits
 #include <numeric> // std::accumulate
-#include <tr1/functional>
+#include <functional>
 #include <display/listview.h>
 #include <input/manager.h>
 #include <utils/lock.h>
@@ -45,10 +45,10 @@ ListView::ListView():
 {
     m_insertMode = false;
 
-    m_bindings[KEY_UP] = std::tr1::bind(&ListView::scroll_list, this, -1);
-    m_bindings[KEY_DOWN] = std::tr1::bind(&ListView::scroll_list, this, 1);
-    m_bindings[KEY_PPAGE] = std::tr1::bind(&ListView::scroll_list, this, -20);
-    m_bindings[KEY_NPAGE] = std::tr1::bind(&ListView::scroll_list, this, 20);
+    m_bindings[KEY_UP] = std::bind(&ListView::scroll_list, this, -1);
+    m_bindings[KEY_DOWN] = std::bind(&ListView::scroll_list, this, 1);
+    m_bindings[KEY_PPAGE] = std::bind(&ListView::scroll_list, this, -20);
+    m_bindings[KEY_NPAGE] = std::bind(&ListView::scroll_list, this, 20);
 
     resize();
 }
@@ -65,8 +65,8 @@ void ListView::resize()
 
     std::for_each(m_columns.begin(), m_columns.end(), std::mem_fun(&Column::reset_width));
 
-    using std::tr1::bind;
-    using std::tr1::placeholders::_1;
+    using std::bind;
+    using std::placeholders::_1;
 
     Columns::const_iterator it = m_columns.end();
     do {

@@ -21,7 +21,7 @@
  *  
  */
 
-#include <tr1/functional>
+#include <functional>
 #include <ui/status_user.h>
 #include <core/events.h>
 
@@ -31,7 +31,7 @@ StatusUser::StatusUser()
 {
     set_name("user");
     events::add_listener("window changed",
-            std::tr1::bind(&StatusUser::update, this));
+            std::bind(&StatusUser::update, this));
     update();
 }
 

@@ -17,7 +17,7 @@
 
 #include <sstream>
 #include <iomanip>
-#include <tr1/functional>
+#include <functional>
 #include <ui/window_transfers.h>
 #include <ui/window_privatemessage.h>
 #include <ui/window_hub.h>
@@ -52,24 +52,24 @@ WindowTransfers::WindowTransfers()
     insert_column(new display::Column("Filename/Status", 50, 100, 200));
     resize();
 
-    m_bindings['m'] = std::tr1::bind(&WindowTransfers::msg, this);
-    m_bindings['F'] = std::tr1::bind(&WindowTransfers::force, this);
-    m_bindings['f'] = std::tr1::bind(&WindowTransfers::add_favorite, this);
-    m_bindings['r'] = std::tr1::bind(&WindowTransfers::remove_source, this);
-    m_bindings['c'] = std::tr1::bind(&WindowTransfers::disconnect, this);
-    m_bindings['R'] = std::tr1::bind(&WindowTransfers::remove_download, this);
+    m_bindings['m'] = std::bind(&WindowTransfers::msg, this);
+    m_bindings['F'] = std::bind(&WindowTransfers::force, this);
+    m_bindings['f'] = std::bind(&WindowTransfers::add_favorite, this);
+    m_bindings['r'] = std::bind(&WindowTransfers::remove_source, this);
+    m_bindings['c'] = std::bind(&WindowTransfers::disconnect, this);
+    m_bindings['R'] = std::bind(&WindowTransfers::remove_download, this);
 
     // browse
-    m_bindings['b'] = std::tr1::bind(&QueueManager::addList, QueueManager::getInstance(),
-                        std::tr1::bind(&WindowTransfers::get_user, this), QueueItem::FLAG_CLIENT_VIEW);
+    m_bindings['b'] = std::bind(&QueueManager::addList, QueueManager::getInstance(),
+                        std::bind(&WindowTransfers::get_user, this), QueueItem::FLAG_CLIENT_VIEW);
     // match queue
-    m_bindings['M'] = std::tr1::bind(&QueueManager::addList, QueueManager::getInstance(),
-                        std::tr1::bind(&WindowTransfers::get_user, this), QueueItem::FLAG_MATCH_QUEUE);
+    m_bindings['M'] = std::bind(&QueueManager::addList, QueueManager::getInstance(),
+                        std::bind(&WindowTransfers::get_user, this), QueueItem::FLAG_MATCH_QUEUE);
 
     // grant a slot
-    m_bindings['g'] = std::tr1::bind(&UploadManager::reserveSlot,
+    m_bindings['g'] = std::bind(&UploadManager::reserveSlot,
                         UploadManager::getInstance(),
-                        std::tr1::bind(&WindowTransfers::get_user, this));
+                        std::bind(&WindowTransfers::get_user, this));
 }
 
 User::Ptr WindowTransfers::get_user()

@@ -28,7 +28,7 @@
 #include <ncurses.h>
 #include <pthread.h>
 #include <sys/stat.h>
-#include <tr1/functional>
+#include <functional>
 #include <utils/stacktrace.h>
 #include <utils/utils.h>
 #include <utils/signal_handler.h>
@@ -72,8 +72,8 @@ int Nanodc::run()
 
 void Nanodc::add_signal_handlers()
 {
-    std::tr1::function<void (uint32_t)> handler = std::tr1::bind(
-            &Nanodc::handle_crash, this, std::tr1::placeholders::_1);
+    std::function<void (uint32_t)> handler = std::bind(
+            &Nanodc::handle_crash, this, std::placeholders::_1);
 
     utils::SignalHandler::add_handler(SIGINT, handler);
     utils::SignalHandler::add_handler(SIGILL, handler);

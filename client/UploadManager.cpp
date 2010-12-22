@@ -34,6 +34,7 @@
 #include "CryptoManager.h"
 
 #include <functional>
+template <class _Pair> struct select1st : public std::_Select1st<_Pair> {};
 
 static const string UPLOAD_AREA = "Uploads";
 

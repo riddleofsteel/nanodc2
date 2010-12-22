@@ -1,5 +1,7 @@
 
 #include "completion.h"
+#include <functional>
+#include <algorithm>
 
 namespace input {
 

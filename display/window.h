@@ -26,7 +26,7 @@
 
 #include <glib.h>
 #include <map>
-#include <tr1/functional>
+#include <functional>
 #include <display/curses_window.h>
 #include <display/input_window.h>
 
@@ -134,7 +134,7 @@ protected:
     display::CursesWindow m_titleWindow;
     Type m_type;
     State m_state;
-    std::map<wint_t, std::tr1::function<void ()> > m_bindings;
+    std::map<wint_t, std::function<void ()> > m_bindings;
     bool m_insertMode;
     bool m_drawTitle;
 private:

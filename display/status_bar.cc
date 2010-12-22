@@ -23,7 +23,7 @@
 
 #include <stdexcept>
 #include <sstream>
-#include <tr1/functional>
+#include <ext/functional>
 #include <core/settings.h>
 #include <core/log.h>
 #include <utils/utils.h>
@@ -38,7 +38,7 @@ StatusBar::StatusBar():
 {
     update_config();
     core::Settings::get()->add_listener(
-        std::tr1::bind(&StatusBar::update_config, this));
+        std::bind(&StatusBar::update_config, this));
 }
 
 void StatusBar::add_item(display::StatusItem *item, int pos)
@@ -46,9 +46,9 @@ void StatusBar::add_item(display::StatusItem *item, int pos)
 {
     utils::Lock l(m_mutex);
     StatusItems::iterator it = std::find_if(m_items.begin(), m_items.end(),
-        std::tr1::bind(
+        std::bind(
             std::bind2nd(std::equal_to<std::string>(), item->get_name()),
-            std::tr1::bind(&StatusItem::get_name, std::tr1::placeholders::_1)
+            std::bind(&StatusItem::get_name, std::placeholders::_1)
         ));
 
     if(it != m_items.end())
@@ -91,9 +91,9 @@ void StatusBar::update_item(const std::string &name)
     utils::Lock l(m_mutex);
 
     StatusItems::iterator it = std::find_if(m_items.begin(), m_items.end(),
-        std::tr1::bind(
+        std::bind(
             std::bind2nd(std::equal_to<std::string>(), name),
-            std::tr1::bind(&StatusItem::get_name, std::tr1::placeholders::_1)
+            std::bind(&StatusItem::get_name, std::placeholders::_1)
         ));
 
     if(it == m_items.end())

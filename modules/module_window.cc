@@ -33,11 +33,12 @@ class Window
 public:
     Window() {
         events::add_listener("command window",
-            std::tr1::bind(&Window::window_callback, this));
+            std::bind(&Window::window_callback, this));
 
-        events::add_listener("command wc",
-            std::tr1::bind(&events::emit, std::string("command window"),
-                std::string("close")));
+#warning RE-enable this
+//         events::add_listener("command wc",
+//             std::bind(&events::emit, std::string("command window"),
+//                 std::string("close")));
     }
 
     void window_callback() {

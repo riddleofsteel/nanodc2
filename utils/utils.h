@@ -55,8 +55,9 @@ public:
             else {
                 *s1 = *s2;
             }
-            *s1++;
-            *s2++;
+#warning FIX rot13_traits
+//             *s1++;
+//             *s2++;
         }
         return s1-n;
     }

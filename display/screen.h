@@ -26,7 +26,7 @@
 
 #include <stdexcept>
 #include <string>
-#include <ncursesw/ncurses.h>
+#include <ncurses.h>
 #include <utils/mutex.h>
 #include <utils/lock.h>
 

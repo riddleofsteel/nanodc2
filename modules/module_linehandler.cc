@@ -23,7 +23,7 @@
 
 #include <sstream>
 #include <stdexcept>
-#include <tr1/functional>
+#include <functional>
 #include <display/window.h>
 #include <display/manager.h>
 #include <core/events.h>
@@ -38,7 +38,7 @@ public:
         m_commandChar('/')
     {
         events::add_listener("key pressed",
-                std::tr1::bind(&LineHandler::key_pressed, this));
+                std::bind(&LineHandler::key_pressed, this));
     }
 
     void key_pressed()

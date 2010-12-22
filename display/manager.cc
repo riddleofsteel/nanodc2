@@ -25,7 +25,7 @@
 #include <algorithm>
 #include <functional>
 #include <stdexcept>
-#include <tr1/functional>
+#include <functional>
 #include <display/screen.h>
 #include <display/manager.h>
 #include <utils/utils.h>
@@ -41,15 +41,15 @@ Manager::Manager():
     m_altPressed(false)
 {
     events::add_listener("key pressed",
-            std::tr1::bind(&display::Window::handle,
-                std::tr1::bind(&display::Manager::get_current_window, this),
-                std::tr1::bind(&events::arg<wint_t>, 1)));
+            std::bind(&display::Window::handle,
+                std::bind(&display::Manager::get_current_window, this),
+                std::bind(&events::arg<wint_t>, 1)));
 
     events::add_listener_first("key pressed",
-            std::tr1::bind(&display::Manager::handle_key, this));
+            std::bind(&display::Manager::handle_key, this));
 
     events::add_listener_last("window closed",
-            std::tr1::bind(&display::Manager::window_closed, this));
+            std::bind(&display::Manager::window_closed, this));
 
     m_inputWindow.set_input(&display::Window::m_input);
 }
@@ -177,12 +177,12 @@ void Manager::remove(display::Window *window)
 
 Windows::iterator Manager::find(const std::string &name)
 {
-    using std::tr1::placeholders::_1;
+    using std::placeholders::_1;
     utils::Lock lock(m_mutex);
     return std::find_if(m_windows->begin(), m_windows->end(),
-                std::tr1::bind(
+                std::bind(
                     std::equal_to<std::string>(),
-                    std::tr1::bind(&Window::get_name, _1),
+                    std::bind(&Window::get_name, _1),
                     name
                 ));
 }

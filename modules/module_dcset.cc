@@ -23,7 +23,7 @@
 
 #include <sstream>
 #include <stdexcept>
-#include <tr1/functional>
+#include <functional>
 #include <client/stdinc.h>
 #include <client/DCPlusPlus.h>
 #include <client/SettingsManager.h>
@@ -92,10 +92,10 @@ class DcSet
 public:
     DcSet() {
         events::add_listener("command dcset",
-                std::tr1::bind(&DcSet::set, this));
+                std::bind(&DcSet::set, this));
 
         events::add_listener("command nick",
-                std::tr1::bind(&DcSet::set_nick, this));
+                std::bind(&DcSet::set_nick, this));
     }
 
     /** "command nick" event handler. */

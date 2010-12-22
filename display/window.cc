@@ -23,7 +23,7 @@
 
 #include <stdexcept>
 #include <iostream>
-#include <tr1/functional>
+#include <functional>
 #include <display/manager.h>
 #include <display/window.h>
 #include <display/screen.h>
@@ -48,8 +48,8 @@ Window::Window():
     m_drawTitle(true)
 {
     // ^X
-    m_bindings['X' - '@'] = std::tr1::bind(&display::Manager::remove,
-                                    std::tr1::bind(&display::Manager::get),
+    m_bindings['X' - '@'] = std::bind(&display::Manager::remove,
+                                    std::bind(&display::Manager::get),
                                     this);
     set_prompt();
     resize();

@@ -26,6 +26,7 @@
 
 #include <stdexcept>
 #include <vector>
+#include <algorithm>
 #include <utils/utils.h>
 #include <utils/mutex.h>
 #include <display/window.h>

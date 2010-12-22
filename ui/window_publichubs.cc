@@ -24,7 +24,7 @@
 #include <algorithm>
 #include <sstream>
 #include <iomanip>
-#include <tr1/functional>
+#include <functional>
 #include <display/manager.h>
 #include <core/events.h>
 #include <ui/window_hub.h>
@@ -52,17 +52,17 @@ WindowHubs::WindowHubs():
     insert_column(new display::Column("Address", 10, 25, 40));
     insert_column(new display::Column("Name", 10, 25, 200));
 
-    m_bindings['f'] = std::tr1::bind(&WindowHubs::favorite, this);
-    m_bindings['c'] = std::tr1::bind(&WindowHubs::connect, this);
-//    m_bindings['s'] = std::tr1::bind(&WindowHubs::sort_items, this);
-    m_bindings['d'] = std::tr1::bind(&WindowHubs::download, this);
+    m_bindings['f'] = std::bind(&WindowHubs::favorite, this);
+    m_bindings['c'] = std::bind(&WindowHubs::connect, this);
+//    m_bindings['s'] = std::bind(&WindowHubs::sort_items, this);
+    m_bindings['d'] = std::bind(&WindowHubs::download, this);
 
-    m_bindings['s'] = std::tr1::bind(&WindowHubs::set_property, this, PROP_DESCRIPTION);
-    m_bindings['a'] = std::tr1::bind(&WindowHubs::set_property, this, PROP_ADDRESS);
-    m_bindings['h'] = std::tr1::bind(&WindowHubs::set_property, this, PROP_HUBLIST);
-    m_bindings['u'] = std::tr1::bind(&WindowHubs::set_property, this, PROP_USERS);
-    m_bindings['n'] = std::tr1::bind(&WindowHubs::set_property, this, PROP_MINSHARE);
-    m_bindings['m'] = std::tr1::bind(&WindowHubs::set_property, this, PROP_MAXSHARE);
+    m_bindings['s'] = std::bind(&WindowHubs::set_property, this, PROP_DESCRIPTION);
+    m_bindings['a'] = std::bind(&WindowHubs::set_property, this, PROP_ADDRESS);
+    m_bindings['h'] = std::bind(&WindowHubs::set_property, this, PROP_HUBLIST);
+    m_bindings['u'] = std::bind(&WindowHubs::set_property, this, PROP_USERS);
+    m_bindings['n'] = std::bind(&WindowHubs::set_property, this, PROP_MINSHARE);
+    m_bindings['m'] = std::bind(&WindowHubs::set_property, this, PROP_MAXSHARE);
 }
 
 void WindowHubs::connect()
@@ -280,8 +280,8 @@ std::string WindowHubs::get_infobox_line(unsigned int n)
 {
     utils::Lock l(m_mutex);
 
-    using std::tr1::bind;
-    using std::tr1::placeholders::_1;
+    using std::bind;
+    using std::placeholders::_1;
 
     std::vector<HubEntry>::iterator it = std::find_if(m_hubs.begin(), m_hubs.end(),
         bind(std::equal_to<std::string>(),

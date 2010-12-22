@@ -23,7 +23,7 @@
 
 #include <sstream>
 #include <iomanip>
-#include <tr1/functional>
+#include <functional>
 #include <utils/utils.h>
 #include <core/log.h>
 #include <core/events.h>
@@ -38,13 +38,13 @@ WindowFavorites::WindowFavorites():
     set_title("Favorite hubs: " + utils::to_string(FavoriteManager::getInstance()->getFavoriteHubs().size()));
     set_name("favorites");
 
-    m_bindings['c'] = std::tr1::bind(&WindowFavorites::connect, this, true);
-    m_bindings['C'] = std::tr1::bind(&WindowFavorites::connect, this, false);
-    m_bindings['d'] = std::tr1::bind(&WindowFavorites::rmfav, this, true);
-    m_bindings['D'] = std::tr1::bind(&WindowFavorites::rmfav, this, false);
-    m_bindings['e'] = std::tr1::bind(&WindowFavorites::edit, this);
-    m_bindings['n'] = std::tr1::bind(&WindowFavorites::add_new, this);
-    m_bindings[' '] = std::tr1::bind(&WindowFavorites::toggle_connect, this);
+    m_bindings['c'] = std::bind(&WindowFavorites::connect, this, true);
+    m_bindings['C'] = std::bind(&WindowFavorites::connect, this, false);
+    m_bindings['d'] = std::bind(&WindowFavorites::rmfav, this, true);
+    m_bindings['D'] = std::bind(&WindowFavorites::rmfav, this, false);
+    m_bindings['e'] = std::bind(&WindowFavorites::edit, this);
+    m_bindings['n'] = std::bind(&WindowFavorites::add_new, this);
+    m_bindings[' '] = std::bind(&WindowFavorites::toggle_connect, this);
 
     insert_column(new display::Column("Auto", 5, 5, 5));
     insert_column(new display::Column("Nick", 10, 15, 20));
@@ -84,9 +84,9 @@ FavoriteHubEntry *WindowFavorites::find_entry(int row)
 {
     FavoriteHubEntry::List favhubs = FavoriteManager::getInstance()->getFavoriteHubs();
     return *std::find_if(favhubs.begin(), favhubs.end(),
-        std::tr1::bind(
+        std::bind(
             std::equal_to<std::string>(),
-            std::tr1::bind(&FavoriteHubEntry::getServer, std::tr1::placeholders::_1),
+            std::bind(&FavoriteHubEntry::getServer, std::placeholders::_1),
             get_text(2, row)
         ));
 }

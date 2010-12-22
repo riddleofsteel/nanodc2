@@ -36,7 +36,7 @@
 #include <core/log.h>
 #include <display/listview.h>
 #include <utils/mutex.h>
-#include <ext/hash_map>
+#include <unordered_map>
 #include <vector>
 #include <string>
 #include <map>

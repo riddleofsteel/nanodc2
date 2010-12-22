@@ -22,7 +22,7 @@
  */
 
 #include <algorithm>
-#include <tr1/functional>
+#include <functional>
 #include <display/directory_window.h>
 #include <input/manager.h>
 #include <utils/lock.h>
@@ -40,10 +40,10 @@ DirectoryWindow::DirectoryWindow():
     m_dirView(new display::ListView()),
     m_fileView(new display::ListView())
 {
-    m_bindings['\t'] = std::tr1::bind(&DirectoryWindow::change_focus, this);
-    m_bindings[KEY_LEFT] = std::tr1::bind(&DirectoryWindow::change_dirview_width, this, -1);
-    m_bindings[KEY_RIGHT] = std::tr1::bind(&DirectoryWindow::change_dirview_width, this, 1);
-    m_bindings['\n'] = std::tr1::bind(&DirectoryWindow::open_item, this);
+    m_bindings['\t'] = std::bind(&DirectoryWindow::change_focus, this);
+    m_bindings[KEY_LEFT] = std::bind(&DirectoryWindow::change_dirview_width, this, -1);
+    m_bindings[KEY_RIGHT] = std::bind(&DirectoryWindow::change_dirview_width, this, 1);
+    m_bindings['\n'] = std::bind(&DirectoryWindow::open_item, this);
 
     m_dirViewWidth = std::max(DIRVIEW_DEFAULTSIZE, get_width()/3);
     m_dirView->insert_column(new display::Column("Name", m_dirViewWidth, m_dirViewWidth, m_dirViewWidth));

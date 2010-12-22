@@ -25,7 +25,7 @@
 #include <algorithm>
 #include <functional>
 #include <stdexcept>
-#include <tr1/functional>
+#include <functional>
 
 #include <utils/utils.h>
 #include <core/log.h>
@@ -51,16 +51,16 @@ Manager::Manager():
     m_lastDraw(utils::get_millisecs())
 {
     events::add_listener("client created",
-            std::tr1::bind(&Manager::create_windows, this));
+            std::bind(&Manager::create_windows, this));
 
     events::add_listener("client created",
-            std::tr1::bind(&Manager::init_statusbar, this));
+            std::bind(&Manager::init_statusbar, this));
 
     events::add_listener_first("window updated",
-        std::tr1::bind(&Manager::redraw_screen, this));
+        std::bind(&Manager::redraw_screen, this));
 
     events::add_listener_first("statusbar updated",
-        std::tr1::bind(&Manager::redraw_screen, this));
+        std::bind(&Manager::redraw_screen, this));
 }
 
 void Manager::redraw_screen()

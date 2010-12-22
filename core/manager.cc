@@ -173,28 +173,29 @@ int Manager::run()
     ui::Manager::create()->init();
 
     /* /q is alias for /quit */
-    events::add_listener("command q",
-            std::tr1::bind(&events::emit, &std::string("command quit")));
+#warning RE-enable this
+//     events::add_listener("command q",
+//             std::bind(&events::emit, std::string("command quit")));
 
     events::add_listener_last("command quit",
-            std::tr1::bind(&events::Manager::quit, events::Manager::get()));
+            std::bind(&events::Manager::quit, events::Manager::get()));
 
     events::add_listener("command quit",
-            std::tr1::bind(&input::Manager::quit, input::Manager::get()));
+            std::bind(&input::Manager::quit, input::Manager::get()));
 
     events::add_listener_first("command quit",
-            std::tr1::bind(&core::Log::log, core::Log::get(),
+            std::bind(&core::Log::log, core::Log::get(),
                 "Shutting down nanodc...", core::MT_MSG));
 
     TimerManager::newInstance();
     TimerManager::getInstance()->start();
 
     boost::thread input_thread(
-                std::tr1::bind(&input::Manager::main_loop,
+                std::bind(&input::Manager::main_loop,
                     input::Manager::get()));
 
     boost::thread client_starter(
-                std::tr1::bind(&Manager::start_client, this));
+                std::bind(&Manager::start_client, this));
 
     core::Log::get()->log("Event loop: " + utils::to_string(utils::gettid()));
     events::Manager::get()->main_loop();

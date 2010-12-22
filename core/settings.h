@@ -27,7 +27,7 @@
 #include <core/properties.h>
 #include <utils/instance.h>
 #include <string>
-#include <tr1/functional>
+#include <functional>
 #include <boost/signal.hpp>
 
 namespace core {
@@ -41,7 +41,7 @@ public:
     void properties_changed();
     /** Read settings from a file.  */
     void read(const std::string &file);
-    boost::signals::connection add_listener(std::tr1::function<void ()> slot) { return m_listeners.connect(slot); }
+    boost::signals::connection add_listener(std::function<void ()> slot) { return m_listeners.connect(slot); }
 private:
     boost::signal<void ()> m_listeners;
 };

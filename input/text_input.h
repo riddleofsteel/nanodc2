@@ -28,7 +28,7 @@
 #include <map>
 #include <string>
 #include <stdexcept>
-#include <tr1/functional>
+#include <functional>
 #include <utils/instance.h>
 
 namespace input {
@@ -62,7 +62,7 @@ private:
     typedef std::deque<String> List;
     static List m_history;
     static List::const_iterator m_historyPos;
-    std::map<wint_t, std::tr1::function<void ()> > m_bindings;
+    std::map<wint_t, std::function<void ()> > m_bindings;
 };
 
 } // namespace input

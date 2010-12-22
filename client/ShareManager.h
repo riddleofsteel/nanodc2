@@ -246,7 +246,7 @@ private:
 	TTHValue xmlRoot;
 	int64_t bzXmlListLen;
 	TTHValue bzXmlRoot;
-	std::auto_ptr<File> bzXmlRef;
+	unique_ptr<File> bzXmlRef;
 
 	bool xmlDirty;
 	bool refreshDirs;

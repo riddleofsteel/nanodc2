@@ -29,7 +29,7 @@
 #include <utils/instance.h>
 #include <utils/mutex.h>
 #include <boost/signals.hpp>
-#include <tr1/functional>
+#include <functional>
 #include <fstream>
 
 namespace core {

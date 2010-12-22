@@ -21,7 +21,7 @@
  *  
  */
 
-#include <tr1/functional>
+#include <functional>
 #include <core/log.h>
 #include <display/manager.h>
 #include <ui/window_privatemessage.h>
@@ -39,7 +39,7 @@ WindowPrivateMessage::WindowPrivateMessage(User::Ptr user, const std::string &my
     set_name("PM:" + m_user->getFirstNick());
 
     // ^B = get file list
-    m_bindings[2] = std::tr1::bind(&WindowPrivateMessage::get_list, this);
+    m_bindings[2] = std::bind(&WindowPrivateMessage::get_list, this);
 }
 
 void WindowPrivateMessage::handle_line(const std::string &line)

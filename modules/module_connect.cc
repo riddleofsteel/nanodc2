@@ -34,14 +34,14 @@ class Connect
 public:
     Connect() {
         events::add_listener("command connect",
-                std::tr1::bind(&Connect::connect_callback, this));
+                std::bind(&Connect::connect_callback, this));
 
         events::add_listener("command disconnect",
-                std::tr1::bind(&Connect::disconnect, this,
-                    std::tr1::bind(&events::arg<std::string>, 0)));
+                std::bind(&Connect::disconnect, this,
+                    std::bind(&events::arg<std::string>, 0)));
 
         events::add_listener("command reconnect",
-                std::tr1::bind(&Connect::reconnect_callback, this));
+                std::bind(&Connect::reconnect_callback, this));
     }
 
     void connect_callback()

@@ -21,7 +21,7 @@
  *  
  */
 
-#include <tr1/functional>
+#include <functional>
 #include <core/log.h>
 #include <utils/utils.h>
 #include <ui/window_sharebrowser.h>
@@ -53,8 +53,8 @@ void WindowShareBrowser::create_tree(Dir *parent, display::Directory *parent2)
     display::Directory *current = new display::Directory(parent2);
     parent2->get_children().push_back(current);
     std::for_each(parent->directories.begin(), parent->directories.end(),
-            std::tr1::bind(&WindowShareBrowser::create_tree, this,
-                std::tr1::placeholders::_1, current));
+            std::bind(&WindowShareBrowser::create_tree, this,
+                std::placeholders::_1, current));
 
     for(File::List::iterator i = parent->files.begin(); i != parent->files.end(); ++i) {
         current->append_child(new ShareItem(*i));

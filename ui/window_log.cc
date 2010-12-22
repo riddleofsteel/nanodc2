@@ -33,16 +33,16 @@ WindowLog::WindowLog()
     set_title("Logger window");
     set_name("nanodc");
     set_state(display::STATE_IS_ACTIVE);
-    std::tr1::function<void (const std::string &, core::MessageType)> listener;
-    listener = std::tr1::bind(&WindowLog::on_log, this,
-            std::tr1::placeholders::_1, std::tr1::placeholders::_2);
+    std::function<void (const std::string &, core::MessageType)> listener;
+    listener = std::bind(&WindowLog::on_log, this,
+            std::placeholders::_1, std::placeholders::_2);
 
-    core::Log::get()->add_listener(std::tr1::bind(&WindowLog::on_log, this,
-                std::tr1::placeholders::_1, std::tr1::placeholders::_2));
+    core::Log::get()->add_listener(std::bind(&WindowLog::on_log, this,
+                std::placeholders::_1, std::placeholders::_2));
 
     events::add_listener("client created",
-            std::tr1::bind(&LogManager::addListener,
-                std::tr1::bind(&LogManager::getInstance),
+            std::bind(&LogManager::addListener,
+                std::bind(&LogManager::getInstance),
                 this));
 }
 

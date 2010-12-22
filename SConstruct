@@ -107,10 +107,10 @@ if not conf.CheckLibWithHeader('boost_signals', 'boost/signals.hpp', 'c++'):
     print 'Note: You might have the lib but not the headers'
     Exit(1)
 
-#if not conf.CheckLibWithHeader('boost_thread', 'boost/thread.hpp', 'c++'):
-#    print 'Did not find the boost_thread library, exiting!'
-#    print 'Note: You might have the lib but not the headers'
-#    Exit(1)
+if not conf.CheckLibWithHeader('boost_thread-mt', 'boost/thread.hpp', 'c++'):
+    print 'Did not find the boost_thread library, exiting!'
+    print 'Note: You might have the lib but not the headers'
+    Exit(1)
 
 if not conf.CheckLibWithHeader('ssl', 'openssl/ssl.h', 'c++'):
     print '\tOpenSSL library (libssl) not found'
@@ -123,7 +123,7 @@ else:
     conf.env.Prepend(CXXFLAGS = '-DUSE_STACKTRACE=1')
 
 env = conf.Finish()
-env.Append(CXXFLAGS = ['-I.', '-ansi', '-Wall'])
+env.Append(CXXFLAGS = ['-I.', '-ansi', '-Wall', '-std=c++0x'])
 #env.Append(CXXFLAGS = commands.getoutput('pkg-config sigc++-2.0 --cflags').split())
 env.Append(CXXFLAGS = commands.getoutput('pkg-config glib-2.0 --cflags').split())
 #env.Append(_LIBFLAGS = ' ' + commands.getoutput('pkg-config sigc++-2.0 --libs'))
@@ -140,13 +140,13 @@ else:
     env.Append(CXXFLAGS = '-rdynamic')
 
 build = env.Program('nanodc', [
-    SConscript('client/SConscript', exports='env', build_dir='build/client', duplicate=0),
-    SConscript('core/SConscript', exports='env', build_dir='build/core', duplicate=0),
-    SConscript('input/SConscript', exports='env', build_dir='build/input', duplicate=0),
-    SConscript('utils/SConscript', exports='env', build_dir='build/utils', duplicate=0),
-    SConscript('ui/SConscript', exports='env', build_dir='build/ui', duplicate=0),
-    SConscript('display/SConscript', exports='env', build_dir='build/display', duplicate=0),
-    SConscript('modules/SConscript', exports='env', build_dir='build/commands', duplicate=0),
+    SConscript('client/SConscript', exports='env', variant_dir='build/client', duplicate=0),
+    SConscript('core/SConscript', exports='env', variant_dir='build/core', duplicate=0),
+    SConscript('input/SConscript', exports='env', variant_dir='build/input', duplicate=0), 
+    SConscript('utils/SConscript', exports='env', variant_dir='build/utils', duplicate=0),
+    SConscript('ui/SConscript', exports='env', variant_dir='build/ui', duplicate=0),
+    SConscript('display/SConscript', exports='env', variant_dir='build/display', duplicate=0),
+    SConscript('modules/SConscript', exports='env', variant_dir='build/commands', duplicate=0),
 ])
 
 Default(build)

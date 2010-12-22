@@ -22,7 +22,7 @@
  */
 
 #include <iomanip>
-#include <tr1/functional>
+#include <functional>
 #include <display/manager.h>
 #include <ui/window_hub.h>
 #include <ui/window_privatemessage.h>

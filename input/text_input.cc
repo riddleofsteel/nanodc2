@@ -22,11 +22,11 @@
  */
 
 #include <glib.h>
-#include <ncursesw/ncurses.h>
+#include <ncurses.h>
 #include <core/settings.h>
 #include <core/log.h>
 #include <utils/utils.h>
-#include <tr1/functional>
+#include <functional>
 #include <input/text_input.h>
 
 namespace input {
@@ -38,9 +38,9 @@ TextInput::TextInput():
     m_utf8(false),
     m_pos(0)
 {
-    m_bindings[KEY_HOME] = std::tr1::bind(&TextInput::set_pos, this, 0);
-    m_bindings[KEY_END] = std::tr1::bind(&TextInput::set_pos, this,
-                                std::tr1::bind(&TextInput::length, this));
+    m_bindings[KEY_HOME] = std::bind(&TextInput::set_pos, this, 0);
+    m_bindings[KEY_END] = std::bind(&TextInput::set_pos, this,
+                                std::bind(&TextInput::length, this));
 }
 
 void TextInput::update_config()

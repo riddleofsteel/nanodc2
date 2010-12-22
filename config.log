@@ -1,4 +1,4 @@
-file /home/sebastian/aur/nanodc/nanodc-svn-16/trunk/src/SConstruct,line 40:
+file /home/sebastian/aur/nanodc2/SConstruct,line 40:
 	Configure(confdir = .sconf_temp)
 scons: Configure: Checking for g++ >= 4.0...
 scons: Configure: (cached) yes
@@ -165,13 +165,13 @@ scons: Configure: The original builder output was:
   |
 scons: Configure: (cached) yes
 
-scons: Configure: Checking for C++ library ssl... 
+scons: Configure: Checking for C++ library boost_thread-mt... 
 scons: Configure: ".sconf_temp/conftest_10.cpp" is up to date.
 scons: Configure: The original builder output was:
   |.sconf_temp/conftest_10.cpp <-
   |  |
   |  |
-  |  |#include "openssl/ssl.h"
+  |  |#include "boost/thread.hpp"
   |  |
   |  |int
   |  |main() {
@@ -186,14 +186,39 @@ scons: Configure: The original builder output was:
   |
 scons: Configure: ".sconf_temp/conftest_10" is up to date.
 scons: Configure: The original builder output was:
-  |g++ -o .sconf_temp/conftest_10 .sconf_temp/conftest_10.o -lncursesw -lpthread -lz -lbz2 -lboost_signals -lssl
+  |g++ -o .sconf_temp/conftest_10 .sconf_temp/conftest_10.o -lncursesw -lpthread -lz -lbz2 -lboost_signals -lboost_thread-mt
+  |
+scons: Configure: (cached) yes
+
+scons: Configure: Checking for C++ library ssl... 
+scons: Configure: ".sconf_temp/conftest_11.cpp" is up to date.
+scons: Configure: The original builder output was:
+  |.sconf_temp/conftest_11.cpp <-
+  |  |
+  |  |
+  |  |#include "openssl/ssl.h"
+  |  |
+  |  |int
+  |  |main() {
+  |  |  
+  |  |return 0;
+  |  |}
+  |  |
+  |
+scons: Configure: ".sconf_temp/conftest_11.o" is up to date.
+scons: Configure: The original builder output was:
+  |g++ -o .sconf_temp/conftest_11.o -c .sconf_temp/conftest_11.cpp
+  |
+scons: Configure: ".sconf_temp/conftest_11" is up to date.
+scons: Configure: The original builder output was:
+  |g++ -o .sconf_temp/conftest_11 .sconf_temp/conftest_11.o -lncursesw -lpthread -lz -lbz2 -lboost_signals -lboost_thread-mt -lssl
   |
 scons: Configure: (cached) yes
 
 scons: Configure: Checking for C function backtrace()... 
-scons: Configure: ".sconf_temp/conftest_11.c" is up to date.
+scons: Configure: ".sconf_temp/conftest_12.c" is up to date.
 scons: Configure: The original builder output was:
-  |.sconf_temp/conftest_11.c <-
+  |.sconf_temp/conftest_12.c <-
   |  |
   |  |
   |  |#include <assert.h>
@@ -214,13 +239,13 @@ scons: Configure: The original builder output was:
   |  |}
   |  |
   |
-scons: Configure: ".sconf_temp/conftest_11.o" is up to date.
+scons: Configure: ".sconf_temp/conftest_12.o" is up to date.
 scons: Configure: The original builder output was:
-  |gcc -o .sconf_temp/conftest_11.o -c .sconf_temp/conftest_11.c
+  |gcc -o .sconf_temp/conftest_12.o -c .sconf_temp/conftest_12.c
   |
-scons: Configure: ".sconf_temp/conftest_11" is up to date.
+scons: Configure: ".sconf_temp/conftest_12" is up to date.
 scons: Configure: The original builder output was:
-  |gcc -o .sconf_temp/conftest_11 .sconf_temp/conftest_11.o -lncursesw -lpthread -lz -lbz2 -lboost_signals -lssl
+  |gcc -o .sconf_temp/conftest_12 .sconf_temp/conftest_12.o -lncursesw -lpthread -lz -lbz2 -lboost_signals -lboost_thread-mt -lssl
   |
 scons: Configure: (cached) yes
 

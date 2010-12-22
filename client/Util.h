@@ -371,7 +371,7 @@ public:
 	template<typename T>
 	static T& intersect(T& t1, const T& t2) {
 		for(typename T::iterator i = t1.begin(); i != t1.end();) {
-			if(find_if(t2.begin(), t2.end(), bind1st(equal_to<typename T::value_type>(), *i)) == t2.end())
+			if(find_if(t2.begin(), t2.end(), bind(equal_to<typename T::value_type>(), *i)) == t2.end())
 				i = t1.erase(i);
 			else
 				++i;
